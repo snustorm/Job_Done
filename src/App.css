@@ -143,18 +143,49 @@ button {
   }
   
 .task {
-    padding: 0.5em 0;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 0.5em 0;
     border-bottom: 1px solid #ccc;
-  }
+}
   
 .task-index {
     font-weight: bold;
     margin-right: 0.5em;
   }
 
-  .ongoing {
+.task_content {
+    flex-grow: 1;
+}
+
+.square {
+    width: 14px; /* Size of the outer square */
+    height: 14px; /* Size of the outer square */
+    border: 2px solid black; /* Border color */
+    border-radius: 15%; /* Slight rounding for the square corners */
+    background-color: white; /* Empty square */
+    position: relative; /* Ensure that absolute children are positioned correctly */
+    transition: all 0.2s ease; /* Transition for the outer square */
+  }
+  
+.square.pressed {
+    /* When pressed, show the smaller black square inside */
+    background-color: white; /* Keep the outer square white */
+}
+  
+.square.pressed::after {
+    /* This creates the smaller black square inside the empty one */
+    content: '';
+    position: absolute;
+    top: 2px; /* 2px from the top of the parent square */
+    left: 2px; /* 2px from the left of the parent square */
+    width: 10px; /* 90% of the original square size */
+    height: 10px;
+    background-color: black; /* The smaller black square inside */
+}
+  
+.ongoing {
     font-size: 0.9em; /* Smaller font size */
     font-weight: bold;
     color: gray;
@@ -168,6 +199,18 @@ button {
     justify-content: space-between; /* Space between items */
     align-items: center; /* Center vertically */
 }
+
+
+/* Complete */
+
+.complete-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 16px;
+}
+
 
 .completed {
     font-size: 0.9em;
@@ -191,6 +234,7 @@ button {
     text-decoration: underline; /* Underline on hover */
 }
 
+
 .priority-indicator {
     display: inline-block; /* Allow positioning inline with the text */
     width: 10px; /* Width of the circle */
@@ -204,6 +248,9 @@ button {
 
 /* Priority Modal */
 /* Modal Styles */
+
+
+
 .modal {
     position: fixed;
     top: 0;
@@ -214,6 +261,7 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1000;
   }
   
   .modal-content {
