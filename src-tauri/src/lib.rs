@@ -39,8 +39,9 @@ fn save_tasks_to_file(tasks: &Vec<Task>) -> Result<(), String> {
 
 #[tauri::command]
 fn add_task(content: String, priority: String) -> Result<Vec<Task>, String> {
-    let mut tasks = TASK_LIST.lock().map_err(|_| "Failed to lock the task list".to_string())?;
 
+    let mut tasks = load_tasks_from_file()?;
+    
     tasks.push(Task { content, priority });
 
     tasks.sort_by(|a, b| {
